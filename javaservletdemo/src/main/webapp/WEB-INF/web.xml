@@ -5,6 +5,17 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <!-- ApplicationContext 를 만드는데 필요한 설정파일들 -->
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>com.metamong.AppConfig</param-value>
+  </context-param>
+
   <filter>
     <filter-name>myFilter</filter-name>
     <filter-class>com.metamong.MyFilter</filter-class>
@@ -18,9 +29,19 @@
   </filter-mapping>
 
   <listener>
-    <listener-class>com.metamong.MyListener</listener-class>
+    <!--  7강.  -->
+    <!--    <listener-class>com.metamong.MyListener</listener-class>-->
+
+    <!--
+      * 8강. Comment
+      * 1. ApplicationContext 를 servlet 의 생명 주기에 맞춰 바인딩.
+      * 2. ApplicationContext 를 웹 어플리케이션 등록된 서블릿들이 사용할 수 있도록
+        ServletContext 에 등록.
+      * 3. Servlet 종료 시점에 ApplicationContext 제거
+    -->
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  
+
   <servlet>
     <servlet-name>hello</servlet-name>
     <servlet-class>com.metamong.HelloServlet</servlet-class>

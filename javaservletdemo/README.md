@@ -3,6 +3,7 @@
 ### 해당 강좌
 > 6강. 서블릿 애플리케이션 개발
 > 7강. 서블릿 리스너와 필터
+> 8강. 스프링 IoC 컨테이너 연동
 
 * 준비사항: 
     - [Maven](http://maven.apache.org/download.cgi)
