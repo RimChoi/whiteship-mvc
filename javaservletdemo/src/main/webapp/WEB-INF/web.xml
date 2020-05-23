@@ -4,6 +4,22 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <filter>
+    <filter-name>myFilter</filter-name>
+    <filter-class>com.metamong.MyFilter</filter-class>
+  </filter>
+
+  <!-- url-pattern, servlet-name 중 택 1 -->
+  <!-- 여러 개의 서블릿에 적용하려면 .. url-pattern -->
+  <filter-mapping>
+    <filter-name>myFilter</filter-name>
+    <servlet-name>hello</servlet-name>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>com.metamong.MyListener</listener-class>
+  </listener>
   
   <servlet>
     <servlet-name>hello</servlet-name>
