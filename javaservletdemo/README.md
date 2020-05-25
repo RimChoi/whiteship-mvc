@@ -9,8 +9,7 @@
 > 11강. DispatcherServlet 2부<br>
 > 12강. DispatcherServlet 3부<br>
 > 13강. 스프링 MVC 구성요소<br>
-
-
+> 14강. 스프링 MVC 동작원리 마무리<br>
 
 * 준비사항: 
     - [Maven](http://maven.apache.org/download.cgi)
