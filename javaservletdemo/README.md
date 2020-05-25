@@ -11,6 +11,10 @@
 > 13강. 스프링 MVC 구성요소<br>
 > 14강. 스프링 MVC 동작원리 마무리<br>
 
+## 2부. 스프링 MVC 설정
+### 해당 강좌
+> 15강. 스프링 MVC 구성요소 직접 빈으로 등록하기
+
 * 준비사항: 
     - [Maven](http://maven.apache.org/download.cgi)
     - [Tomcat](http://tomcat.apache.org/)
