@@ -4,6 +4,7 @@
 > 6강. 서블릿 애플리케이션 개발<br>
 > 7강. 서블릿 리스너와 필터<br>
 > 8강. 스프링 IoC 컨테이너 연동<br>
+> 9강. 스프링 MVC 연동<br>
 
 * 준비사항: 
     - [Maven](http://maven.apache.org/download.cgi)
