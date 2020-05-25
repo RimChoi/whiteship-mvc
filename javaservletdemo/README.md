@@ -14,7 +14,8 @@
 ## 2부. 스프링 MVC 설정
 ### 해당 강좌
 > 15강. 스프링 MVC 구성요소 직접 빈으로 등록하기<br>
-> 16강. @EnableWebMvc
+> 16강. @EnableWebMvc<br>
+> 17강. WebMvcConfigurer<br>
 
 * 준비사항: 
     - [Maven](http://maven.apache.org/download.cgi)
