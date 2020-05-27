@@ -2,8 +2,8 @@
 
 ## 2부. 스프링 MVC 설정
 ### 해당 강좌
-> 19강. 스프링 부트 JSP<br>
-> 20강. WAR 파일 배포하기<br>
+> 21강. WebMvcConfigurer 1부 Formatter<br>
+
 
 
 
