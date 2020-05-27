@@ -18,10 +18,10 @@ public class SampleController {
      * @param person
      * @return
      */
-    @GetMapping(value = "/hello/{name}")
-    public String hello(@PathVariable(name="name")  Person person, @RequestParam String type) {
+    @GetMapping(value = "/hello")
+    public String hello(@RequestParam("id") Person person) {
 
-        person.setType(type);
+        person.setType("pokemon");
         logger.info(person.toString());
         return "hello " + person.getName() + " (" + person.getType() + ")";
     }
