@@ -1,5 +1,6 @@
 package com.metamong.demobootweb;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,6 +33,9 @@ public class SampleControllerTest {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Test
     public void hello() throws Exception {
@@ -70,5 +75,21 @@ public class SampleControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string("hello"));
+    }
+
+    @Test
+    public void jsonMessage() throws Exception {
+        Person person = new Person();
+        person.setId(2020L);
+        person.setName("metamong");
+        person.setType("pokemon");
+        String jsonString = objectMapper.writeValueAsString(person);
+
+        this.mockMvc.perform(get("/jsonMessage")
+                .content(jsonString)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }
