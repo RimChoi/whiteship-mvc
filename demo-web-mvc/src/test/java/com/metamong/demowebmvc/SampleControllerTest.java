@@ -4,9 +4,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -22,9 +25,13 @@ public class SampleControllerTest {
 
     @Test
     public void helloTest() throws Exception {
-
+        /**
+         * 복 수의 파라미터테스트시 아래 링크 참조
+         * (https://okky.kr/article/517350) 
+         */
         this.mockMvc.perform(get("/hello")
-                    .contentType(MediaType.APPLICATION_JSON)
+                    .header(HttpHeaders.AUTHORIZATION, "123")
+                    .param("name", "metamong")
                     )
                 .andDo(print())
                 .andExpect(status().isOk())
