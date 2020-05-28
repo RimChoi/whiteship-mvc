@@ -31,16 +31,10 @@ public class SampleControllerTest {
          * 복 수의 파라미터테스트시 아래 링크 참조
          * (https://okky.kr/article/517350) 
          */
-        this.mockMvc.perform(options("/hello"))
+        this.mockMvc.perform(get("/hello"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(header().stringValues(HttpHeaders.ALLOW,
-                        hasItems(
-                                containsString("POST"),
-                                containsString("GET"),
-                                containsString("OPTIONS"),
-                                containsString("HEAD")
-                        )))
+
         ;
 
     }
