@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class SampleController {
 
-    @GetMapping(
-            value = "/hello",
-            //headers = "!" + HttpHeaders.FROM
-            headers = HttpHeaders.AUTHORIZATION + "=" + "123",
-            params = {"name=metamong"}
-    )
+    @GetMapping("/hello")
     @ResponseBody
     public String hello() {
+        return "hello";
+    }
+
+    @PostMapping("/hello")
+    @ResponseBody
+    public String helloPost() {
         return "hello";
     }
 }

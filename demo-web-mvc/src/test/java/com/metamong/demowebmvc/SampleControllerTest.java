@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -29,12 +31,16 @@ public class SampleControllerTest {
          * 복 수의 파라미터테스트시 아래 링크 참조
          * (https://okky.kr/article/517350) 
          */
-        this.mockMvc.perform(get("/hello")
-                    .header(HttpHeaders.AUTHORIZATION, "123")
-                    .param("name", "metamong")
-                    )
+        this.mockMvc.perform(options("/hello"))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(header().stringValues(HttpHeaders.ALLOW,
+                        hasItems(
+                                containsString("POST"),
+                                containsString("GET"),
+                                containsString("OPTIONS"),
+                                containsString("HEAD")
+                        )))
         ;
 
     }
