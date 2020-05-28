@@ -13,6 +13,6 @@
 > 38 강. 핸들러 메소드 1부 [아규먼트](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-arguments
 )와 [리턴 타입](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-return-types
 )<br>
-
+> 39강. 핸들러 메소드 2부 URI 패턴
 
 
