@@ -10,6 +10,7 @@
 > 26강. HTTP 메세지 컨버터<br>
 > 27강. HTTP 메세지 컨버터 JSON<br>
 > 28강. HTTP 메세지 컨버터 XML<br>
+> 29강. 기타 WebMvcConfigurer 설정<br>
 
 
 
