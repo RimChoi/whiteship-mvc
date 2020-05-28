@@ -27,10 +27,13 @@ public class SampleControllerTest {
 
     @Test
     public void getEvent() throws Exception {
-        this.mockMvc.perform(get("/events/2020;name=metamong"))
+        this.mockMvc.perform(get("/events/2020?name=metamong")
+                    .param("name", "metamong")
+                    .param("limit", "20"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(2020));
+                .andExpect(jsonPath("$.name").value("metamong"));
+
     }
 
 }
