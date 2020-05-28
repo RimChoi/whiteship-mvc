@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 @Controller
 public class SampleController {
 
@@ -20,4 +21,17 @@ public class SampleController {
     public String helloPost() {
         return "hello";
     }
+
+    @GetMapping("/events")
+    @ResponseBody
+    public String events() {
+        return "events";
+    }
+
+    @GetMapping("/events/{id}")
+    @ResponseBody
+    public String getAnEvents(@PathVariable int id) {
+        return "events";
+    }
+
 }
