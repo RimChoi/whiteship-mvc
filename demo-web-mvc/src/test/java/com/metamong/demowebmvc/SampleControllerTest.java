@@ -26,6 +26,15 @@ public class SampleControllerTest {
     MockMvc mockMvc;
 
     @Test
+    public void eventForm() throws Exception {
+        this.mockMvc.perform(get("/events/form"))
+                .andDo(print())
+                .andExpect(view().name("events/form"))
+                .andExpect(model().attributeExists("event"));
+
+    }
+
+    @Test
     public void getEvent() throws Exception {
         this.mockMvc.perform(get("/events/2020?name=metamong")
                     .param("name", "metamong")
