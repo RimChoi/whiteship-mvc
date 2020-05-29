@@ -28,5 +28,7 @@
 > 51강. 핸들러 메소드 14부 ResponseEntity<br>
 > 52강. 핸들러 메소드 15부 @RequestBody & HttpEntity<br>
 > 53강. 핸들러 메소드 16부 @ResponseBody & ResponseEntity<br>
+> 54강. 핸들러 메소드 17부 정리 및 과제<br>
+> 55강. 모델 @ModelAttribute<br>
 
 

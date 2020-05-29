@@ -19,6 +19,16 @@ import java.util.List;
 @Controller
 public class EventController {
 
+    @ModelAttribute
+    public void categories(Model model) {
+        model.addAttribute("categories", List.of("study", "seminar", "hobby", "social"));
+    }
+
+//    @ModelAttribute("categories")
+//    public List<String> categories(Model model) {
+//        return List.of("study", "seminar", "hobby", "social");
+//    }
+
     @GetMapping("/events/form/name")
     public String eventsFormName(Model model) {
         model.addAttribute("event", new Event()); // form backing object
