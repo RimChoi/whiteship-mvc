@@ -24,27 +24,6 @@ public class EventController {
     @Autowired
     EventValidator eventValidator;
 
-    @ExceptionHandler({EventException.class, RuntimeException.class})
-    public String eventErrorHandler(RuntimeException exception, Model model) {
-        model.addAttribute("message", "runtime error");
-        return "error";
-    }
-
-    @InitBinder("event")
-    public void initEventBinder(WebDataBinder webDataBinder) {
-        webDataBinder.setDisallowedFields("id");
-//        webDataBinder.addValidators(new EventValidator());
-    }
-
-    @ModelAttribute
-    public void categories(Model model) {
-        model.addAttribute("categories", List.of("study", "seminar", "hobby", "social"));
-    }
-
-//    @ModelAttribute("categories")
-//    public List<String> categories(Model model) {
-//        return List.of("study", "seminar", "hobby", "social");
-//    }
 
     @GetMapping("/events/form/name")
     public String eventsFormName(Model model) {
