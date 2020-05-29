@@ -24,5 +24,5 @@
 > 47강. 핸들러 메소드 10부 @SessionAttribute<br>
 > 48강. 핸들러 메소드 11부 RedirectAttributes<br>
 > 49강. 핸들러 메소드 12부 Flash Attributes<br>
-
+> 50강. 핸들러 메소드 13부 MultipartFile<br>
 
