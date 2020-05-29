@@ -19,4 +19,5 @@
 > 42강. 핸들러 메소드 5부 ModelAttribute<br>
 > 43강. 핸들러 메소드 6부 @Validate<br>
 > 44강. 핸들러 메소드 7부 폼 서브밋(에러처리)<br>
+> 45강. 핸들러 메소드 8부 @SessionAttributes<br>
 
