@@ -31,5 +31,6 @@
 > 54강. 핸들러 메소드 17부 정리 및 과제<br>
 > 55강. 모델 @ModelAttribute<br>
 > 56강. 데이터 바인더 @InitBinder<br>
+> 57강. 예외 처리 핸들러 @ExceptionHandler<br>
 
 
