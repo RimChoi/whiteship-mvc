@@ -11,42 +11,51 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SessionAttributes("event")
 @Controller
 public class SampleController {
 
-    @GetMapping("/events/form")
-    public String eventsForm(Model model) {
-        Event newEvent = new Event();
-        newEvent.setLimit(50);
-        model.addAttribute("event", newEvent); // form backing object
-
-        return "events/form";
+    @GetMapping("/events/form/name")
+    public String eventsFormName(Model model) {
+        model.addAttribute("event", new Event()); // form backing object
+        return "/events/form-name";
     }
 
-    @PostMapping("/events")
-    public String createEvent(@Valid @ModelAttribute Event event, BindingResult bindingResult, SessionStatus sessionStatus) {
+    @PostMapping("/events/form/name")
+    public String eventsForNameSubmit(@Valid @ModelAttribute Event event, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return "/events/form";
+            return "/events/form-name";
         }
 
         // DB 처리
 
-        sessionStatus.setComplete(); //세션 처리 완료
+        return "redirect:/events/form/limit"; // 중복 submit 방지 + RedirectView
+    }
+
+    @GetMapping("/events/form/limit")
+    public String eventsFormLimit(@ModelAttribute Event event, Model model) {
+
+        model.addAttribute("event", event); // form backing object
+        return "/events/form-limit";
+    }
+
+    @PostMapping("/events/form/limit")
+    public String eventsForLimitSubmit(@Valid @ModelAttribute Event event, BindingResult bindingResult, SessionStatus sessionStatus) {
+        if(bindingResult.hasErrors()) {
+            return "/events/form-limit";
+        }
+
+        // DB 처리
+
+//        sessionStatus.setComplete();
         return "redirect:/events/list"; // 중복 submit 방지 + RedirectView
     }
 
     @GetMapping("/events/list")
-    public String getEvents(Model model) {
+    public String getEvents(Model model, @ModelAttribute Event event) {
 
         // DB 읽어오기
-
-        // e.g.
-        Event event = new Event();
-        event.setName("spring");
-        event.setLimit(10);
 
         List<Event> eventList = new ArrayList<>();
         eventList.add(event);

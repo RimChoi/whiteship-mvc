@@ -11,7 +11,10 @@
     <a th:href="@{/events/form}">Create New Event</a>
     <div th:unless="${#lists.isEmpty(eventList)}">
         <ul th:each="event: ${eventList}">
-            <p th:text="${event.Name}">Event Name</p>
+            <li>
+                <span th:text="${event.Name}">Event Name</span>
+                <span th:text="${event.Limit}">Event Limit</span>
+            </li>
         </ul>
     </div>
 </body>
