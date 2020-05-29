@@ -17,7 +17,7 @@ import java.util.List;
 
 @SessionAttributes("event")
 @Controller
-public class SampleController {
+public class EventController {
 
     @GetMapping("/events/form/name")
     public String eventsFormName(Model model) {

@@ -38,7 +38,6 @@ public class FileController {
     }
 
     @GetMapping("/file/{filename}")
-    @ResponseBody
     public ResponseEntity<Resource> fileDownload(@PathVariable String filename) throws IOException {
         Resource resource = resourceLoader.getResource("classpath:" + filename);
         File file = resource.getFile();
