@@ -33,16 +33,13 @@ public class EventApiTest {
 
         Event event = new Event();
         event.setName("metamong");
-        event.setLimit(2020);
+        event.setLimit(-2020);
         String json = objectMapper.writeValueAsString(event);
 
         mockMvc.perform(post("/api/events")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(json))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("metamong"))
-                .andExpect(jsonPath("limit").value("2020"))
-        ;
+                .andExpect(status().isBadRequest());
     }
 }
