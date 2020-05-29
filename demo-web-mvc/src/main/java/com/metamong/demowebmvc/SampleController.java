@@ -22,7 +22,7 @@ public class SampleController {
 
     @PostMapping("/events")
     @ResponseBody
-    public Event getEvent(@Valid @ModelAttribute Event event, BindingResult bindingResult) {
+    public Event getEvent(@Validated(Event.ValidateName.class) @ModelAttribute Event event, BindingResult bindingResult) {
         System.out.println("=====================");
         bindingResult.getAllErrors().forEach(c -> {
             System.out.println(c.toString());
