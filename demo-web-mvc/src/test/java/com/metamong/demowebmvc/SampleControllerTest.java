@@ -8,8 +8,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -36,12 +40,16 @@ public class SampleControllerTest {
 
     @Test
     public void postEvent() throws Exception {
-        this.mockMvc.perform(post("/events?name=metamong")
-
-                    .param("limit", "-10"))
+        ResultActions result = this.mockMvc.perform(post("/events")
+                .param("name", "metamong")
+                .param("limit", "-10"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("metamong"));
+                .andExpect(model().hasErrors());
+
+        ModelAndView mv = result.andReturn().getModelAndView();
+        Map<String, Object> model = mv.getModel();
+        System.out.println(model.size());
 
     }
 

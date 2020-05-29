@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,12 +23,30 @@ public class SampleController {
     }
 
     @PostMapping("/events")
-    @ResponseBody
-    public Event getEvent(@Validated(Event.ValidateName.class) @ModelAttribute Event event, BindingResult bindingResult) {
-        System.out.println("=====================");
-        bindingResult.getAllErrors().forEach(c -> {
-            System.out.println(c.toString());
-        });
-        return event;
+    public String createEvent(@Valid @ModelAttribute Event event, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "/events/form";
+        }
+
+        // DB 처리
+
+        return "redirect:/events/list"; // 중복 submit 방지 + RedirectView
+    }
+
+    @GetMapping("/events/list")
+    public String getEvents(Model model) {
+
+        // DB 읽어오기
+
+        // e.g.
+        Event event = new Event();
+        event.setName("spring");
+        event.setLimit(10);
+
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(event);
+        model.addAttribute("eventList", eventList); // attribute Name, Value 같을 때 Name 생략 가능
+
+        return  "/events/list";
     }
 }
