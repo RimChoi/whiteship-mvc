@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -43,38 +44,61 @@ public class SampleController {
     }
 
     @PostMapping("/events/form/limit")
-    public String eventsForLimitSubmit(@Valid @ModelAttribute Event event, BindingResult bindingResult, SessionStatus sessionStatus) {
+    public String eventsForLimitSubmit(
+            @Valid @ModelAttribute Event event,
+            BindingResult bindingResult,
+            SessionStatus sessionStatus,
+            RedirectAttributes attributes
+    ) {
         if(bindingResult.hasErrors()) {
             return "/events/form-limit";
         }
 
         // DB 처리
 
-//        sessionStatus.setComplete();
+        sessionStatus.setComplete();
+        attributes.addAttribute("name", event.getName());
+        attributes.addAttribute("limit", event.getLimit());
+
         return "redirect:/events/list"; // 중복 submit 방지 + RedirectView
     }
 
+    /**
+     * ModelAttribute 와 SessionAttribute 의 네이밍에 관해서.
+     *
+     * 같은 이름의 ModelAttribute 가 들어올 때, session 에서 찾게 되는데
+     * 우리가 post 해서 받을때 session 을 비웠다 .. ERR
+     * 명시적으로 이름을 다르게 해주셔라..
+     *
+     * 이걸로 1시간...ㅠㅠ...
+     *
+     */
     @GetMapping("/events/list")
     public String getEvents(
             Model model,
             @SessionAttribute LocalDateTime visitTime,
-            HttpSession httpSession
+            @ModelAttribute("newEvent") Event event
     ) {
+
+        // 혹은..
+//        LocalDateTime time = (LocalDateTime) httpSession.getAttribute("visitTime");
+//        System.out.println(time);
 
         System.out.println(visitTime);
 
-        // 혹은..
-        LocalDateTime time = (LocalDateTime) httpSession.getAttribute("visitTime");
-        System.out.println(time);
-
         // DB 읽어오기
 
-        Event mockEvent = new Event();
-        mockEvent.setName("metamong");
-        mockEvent.setLimit(20);
-
         List<Event> eventList = new ArrayList<>();
-        eventList.add(mockEvent);
+
+        if(event.getName() == null) {
+            Event mockEvent = new Event();
+            mockEvent.setName("metamong");
+            mockEvent.setLimit(20);
+            eventList.add(mockEvent);
+        } else {
+            eventList.add(event);
+        }
+
         model.addAttribute("eventList", eventList); // attribute Name, Value 같을 때 Name 생략 가능
 
         return  "/events/list";

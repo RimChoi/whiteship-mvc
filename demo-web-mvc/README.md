@@ -22,5 +22,6 @@
 > 45강. 핸들러 메소드 8부 @SessionAttributes<br>
 > 46강. 핸들러 메소드 9부 멀티 폼 서브밋<br>
 > 47강. 핸들러 메소드 10부 @SessionAttribute<br>
+> 48강. 핸들러 메소드 11부 RedirectAttributes<br>
 
 
