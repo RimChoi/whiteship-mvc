@@ -57,8 +57,7 @@ public class SampleController {
         // DB 처리
 
         sessionStatus.setComplete();
-        attributes.addAttribute("name", event.getName());
-        attributes.addAttribute("limit", event.getLimit());
+        attributes.addFlashAttribute("newEvent",event);
 
         return "redirect:/events/list"; // 중복 submit 방지 + RedirectView
     }
@@ -76,8 +75,7 @@ public class SampleController {
     @GetMapping("/events/list")
     public String getEvents(
             Model model,
-            @SessionAttribute LocalDateTime visitTime,
-            @ModelAttribute("newEvent") Event event
+            @SessionAttribute LocalDateTime visitTime
     ) {
 
         // 혹은..
@@ -90,13 +88,14 @@ public class SampleController {
 
         List<Event> eventList = new ArrayList<>();
 
-        if(event.getName() == null) {
+        if(model.asMap().size() == 0) {
             Event mockEvent = new Event();
             mockEvent.setName("metamong");
             mockEvent.setLimit(20);
             eventList.add(mockEvent);
         } else {
-            eventList.add(event);
+            Event newEvent = (Event) model.asMap().get("newEvent");
+            eventList.add(newEvent);
         }
 
         model.addAttribute("eventList", eventList); // attribute Name, Value 같을 때 Name 생략 가능

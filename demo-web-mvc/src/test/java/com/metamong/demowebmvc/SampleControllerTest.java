@@ -14,6 +14,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -56,6 +57,19 @@ public class SampleControllerTest {
         Map<String, Object> model = mv.getModel();
         System.out.println(model.size());
 
+    }
+
+    @Test
+    public void getEvents() throws Exception {
+        Event newEvent = new Event();
+        newEvent.setName("Summer is Comming ..");
+        newEvent.setLimit(2020);
+
+        this.mockMvc.perform(get("/events/list")
+                    .flashAttr("newEvent", newEvent)
+                    .sessionAttr("visitTime", LocalDateTime.now()))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 }
