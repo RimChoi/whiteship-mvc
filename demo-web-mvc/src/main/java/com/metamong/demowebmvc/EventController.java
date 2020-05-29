@@ -1,10 +1,12 @@
 package com.metamong.demowebmvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,9 +21,18 @@ import java.util.List;
 @Controller
 public class EventController {
 
+    @Autowired
+    EventValidator eventValidator;
+
     @ModelAttribute
     public void categories(Model model) {
         model.addAttribute("categories", List.of("study", "seminar", "hobby", "social"));
+    }
+
+    @InitBinder("event")
+    public void initEventBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setDisallowedFields("id");
+//        webDataBinder.addValidators(new EventValidator());
     }
 
 //    @ModelAttribute("categories")
@@ -40,6 +51,8 @@ public class EventController {
         if(bindingResult.hasErrors()) {
             return "/events/form-name";
         }
+
+        eventValidator.validate(event, bindingResult);
 
         // DB 처리
 
@@ -96,9 +109,10 @@ public class EventController {
 
         // DB 읽어오기
 
+        System.out.println(model.getAttribute("newEvent") == null);
         List<Event> eventList = new ArrayList<>();
 
-        if(model.asMap().size() == 0) {
+        if(model.asMap().size() == 1 && model.getAttribute("newEvent") == null) {
             Event mockEvent = new Event();
             mockEvent.setName("metamong");
             mockEvent.setLimit(20);
