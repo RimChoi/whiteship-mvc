@@ -1,5 +1,6 @@
 package com.metamong.demowebmvc;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,12 +55,26 @@ public class SampleController {
     }
 
     @GetMapping("/events/list")
-    public String getEvents(Model model, @ModelAttribute Event event) {
+    public String getEvents(
+            Model model,
+            @SessionAttribute LocalDateTime visitTime,
+            HttpSession httpSession
+    ) {
+
+        System.out.println(visitTime);
+
+        // 혹은..
+        LocalDateTime time = (LocalDateTime) httpSession.getAttribute("visitTime");
+        System.out.println(time);
 
         // DB 읽어오기
 
+        Event mockEvent = new Event();
+        mockEvent.setName("metamong");
+        mockEvent.setLimit(20);
+
         List<Event> eventList = new ArrayList<>();
-        eventList.add(event);
+        eventList.add(mockEvent);
         model.addAttribute("eventList", eventList); // attribute Name, Value 같을 때 Name 생략 가능
 
         return  "/events/list";
