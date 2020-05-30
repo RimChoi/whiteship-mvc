@@ -20,12 +20,10 @@
 > 17강. WebMvcConfigurer<br>
 > 18강. 스프링 부트의 스프링 MVC 설정
 
-<hr>
 
 * [demo-jsp](https://github.com/RimChoi/whiteship-mvc/tree/master/demo-jsp)
 > 19강. 스프링 부트 JSP<br>
 > 20강. WAR 파일 배포하기<br>
-<hr>
 
 * [demo-boot-web](https://github.com/RimChoi/whiteship-mvc/tree/master/demo-boot-web)
 > 21강. WebMvcConfigurer 1부 Formatter<br>
@@ -37,7 +35,6 @@
 > 27강. HTTP 메세지 컨버터 JSON<br>
 > 28강. HTTP 메세지 컨버터 XML<br>
 > 29강. 기타 WebMvcConfigurer 설정<br>
-<hr>
 
 ## 3부. 스프링 MVC 활용
 ### 해당 강좌
